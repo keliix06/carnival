@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Participant;
 use Illuminate\Http\Request;
 
 class ParticipantsController extends Controller
@@ -13,7 +14,9 @@ class ParticipantsController extends Controller
      */
     public function index()
     {
-        //
+        return view('participants', [
+            'participants' => Participant::all(),
+        ]);
     }
 
     /**
@@ -79,6 +82,8 @@ class ParticipantsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $participant = Participant::findOrFail($id);
+        $participant->delete();
+        redirect()->back();
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class CheckoutController extends Controller
+class WinnersController extends Controller
 {
     /**
      * Display a listing of the resource.

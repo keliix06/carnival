@@ -9,15 +9,13 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.19/css/jquery.dataTables.min.css" integrity="sha256-YY1izqyhIj4W3iyJOaGWOpXDSwrHWFL4Nfk+W0LyCHE=" crossorigin="anonymous" />
 </head>
 <body>
     <div id="app">
@@ -45,13 +43,13 @@
                             </li>
                         @else
                             <li class="nav-item">
-                                <a class="nav-link" href="/participants">Participants</a>
+                                <a class="nav-link {{ (request()->segment(1) == 'participants') ? 'active' : '' }}" href="/participants">Participants</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/items">Items</a>
+                                <a class="nav-link {{ (request()->segment(1) == 'items') ? 'active' : '' }}" href="/items">Items</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/checkout">Checkout</a>
+                                <a class="nav-link {{ (request()->segment(1) == 'winners') ? 'active' : '' }}" href="/winners">Winners</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -80,5 +78,8 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

@@ -20,4 +20,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('participants', 'ParticipantsController');
 Route::resource('items', 'ItemsController');
-Route::resource('checkout', 'CheckoutController');
+Route::resource('winners', 'WinnersController');
