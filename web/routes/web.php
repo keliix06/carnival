@@ -12,9 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::resource('participants', 'ParticipantsController');
+Route::resource('items', 'ItemsController');
+Route::resource('checkout', 'CheckoutController');
