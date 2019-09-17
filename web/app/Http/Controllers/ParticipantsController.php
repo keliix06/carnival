@@ -26,7 +26,16 @@ class ParticipantsController extends Controller
      */
     public function create()
     {
-        //
+        return view('participant-form', [
+            'action' => route('participants.store'),
+            'method' => 'POST',
+            'title' => 'Add Participant',
+            'id' => null,
+            'bidder_number' => null,
+            'name' => null,
+            'email' => null,
+            'phone' => null,
+        ]);
     }
 
     /**

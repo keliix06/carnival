@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        <div class="row justify-content-center mb-4">
+            <div class="col-12">
+                <a href="{{ route('participants.create') }}" class="btn btn-success">Add Participant</a>
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-12">
                 <table id="table" class="table table-striped">
