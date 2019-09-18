@@ -46,7 +46,16 @@ class ParticipantsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid  = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:participants',
+            'phone' => 'required',
+            'bidder_number' => 'required|integer|unique:participants',
+        ]);
+
+        Participant::create($valid);
+
+        return redirect('/participants');
     }
 
     /**
