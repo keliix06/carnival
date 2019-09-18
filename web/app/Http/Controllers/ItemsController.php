@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Item;
+use App\Participant;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
@@ -26,7 +27,13 @@ class ItemsController extends Controller
      */
     public function create()
     {
-        //
+        return view('item-form', [
+            'action' => route('items.store'),
+            'method' => 'POST',
+            'title' => 'Add Item',
+            'id' => null,
+            'name' => null,
+        ]);
     }
 
     /**
@@ -37,7 +44,13 @@ class ItemsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $valid  = $request->validate([
+            'name' => 'required',
+        ]);
+
+        Item::create($valid);
+
+        return redirect()->route('items.index');
     }
 
     /**
@@ -59,7 +72,15 @@ class ItemsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $item = Item::findOrFail($id);
+
+        return view('item-form', [
+            'action' => route('items.update', $item->id),
+            'method' => 'PUT',
+            'title' => 'Edit Item',
+            'id' => $item->id,
+            'name' => $item->name,
+        ]);
     }
 
     /**
@@ -71,7 +92,14 @@ class ItemsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valid  = $request->validate([
+            'name' => 'required',
+        ]);
+
+        $item = Item::findOrFail($id);
+        $item->update($valid);
+
+        return redirect()->route('items.index');
     }
 
     /**
@@ -82,6 +110,8 @@ class ItemsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $item = Item::findOrFail($id);
+        $item->delete();
+        return redirect()->route('items.index');
     }
 }

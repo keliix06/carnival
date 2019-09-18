@@ -21,9 +21,9 @@
                     @foreach ($items as $item)
                         <tr>
                             <td>{{ $item->name }}</td>
-                            <td><a href="/items/{{ $item->id }}/edit" class="btn btn-outline-info">Edit</a></td>
+                            <td><a href="{{ route('items.edit', $item->id) }}" class="btn btn-outline-info">Edit</a></td>
                             <td>
-                                <form action="items/{{ $item->id }}" method="POST">
+                                <form action="{{ route('items.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete {{ $item->name }}?');">
                                     @method('DELETE')
                                     @csrf
                                     <button type="submit" class="btn btn-outline-danger">Delete</button>
