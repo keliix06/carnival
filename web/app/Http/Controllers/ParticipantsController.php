@@ -55,7 +55,7 @@ class ParticipantsController extends Controller
 
         Participant::create($valid);
 
-        return redirect('/participants');
+        return redirect()->route('participants.index');
     }
 
     /**
@@ -77,7 +77,18 @@ class ParticipantsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $participant = Participant::findOrFail($id);
+
+        return view('participant-form', [
+            'action' => route('participants.update', $participant->id),
+            'method' => 'PUT',
+            'title' => 'Edit Participant',
+            'id' => $participant->id,
+            'bidder_number' => $participant->bidder_number,
+            'name' => $participant->name,
+            'email' => $participant->email,
+            'phone' => $participant->phone,
+        ]);
     }
 
     /**
@@ -89,7 +100,17 @@ class ParticipantsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valid  = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'bidder_number' => 'required|integer',
+        ]);
+
+        $participant = Participant::findOrFail($id);
+        $participant->update($valid);
+
+        return redirect()->route('participants.index');
     }
 
     /**

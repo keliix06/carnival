@@ -27,7 +27,7 @@
                             <td>{{ $participant->name }}</td>
                             <td>{{ $participant->email }}</td>
                             <td>{{ $participant->phone }}</td>
-                            <td><a href="/participants/edit/{{ $participant->id }}" class="btn btn-outline-info">Edit</a></td>
+                            <td><a href="/participants/{{ $participant->id }}/edit" class="btn btn-outline-info">Edit</a></td>
                             <td>
                                 <form action="participants/{{ $participant->id }}" method="POST">
                                     @method('DELETE')
