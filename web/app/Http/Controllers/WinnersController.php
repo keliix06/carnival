@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\AuctionWinner;
+use App\Item;
+use App\Participant;
 use Illuminate\Http\Request;
 
 class WinnersController extends Controller
@@ -13,7 +16,19 @@ class WinnersController extends Controller
      */
     public function index()
     {
-        //
+        $participants = Participant::all();
+        $participants->each(function($participant) {
+            $participant->wonItems = AuctionWinner::where('participant_id', $participant->id)->get();
+            $participant->hasPaid = AuctionWinner::where('participant_id', $participant->id)->where('paid', false)->count() < 1;
+        });
+
+        $participants = $participants->filter(function($participant) {
+            return count($participant->wonItems) > 0;
+        });
+
+        return view('winners', [
+            'winners' => $participants,
+        ]);
     }
 
     /**
@@ -23,7 +38,14 @@ class WinnersController extends Controller
      */
     public function create()
     {
-        //
+        return view('winners-form', [
+            'action' => route('winners.store'),
+            'method' => 'POST',
+            'title' => 'Add Winner',
+            'participants' => Participant::all(),
+            'item' => Item::findOrFail(request()->get('item_id')),
+            'currentWinners' => AuctionWinner::where('item_id', request()->get('item_id'))->get(),
+        ]);
     }
 
     /**
@@ -34,7 +56,13 @@ class WinnersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        AuctionWinner::create([
+            'participant_id' => request('participant_id'),
+            'item_id' => request('item_id'),
+            'price' => request('price') * 100
+        ]);
+
+        return redirect()->route('winners.index');
     }
 
     /**
@@ -68,7 +96,9 @@ class WinnersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $winner = AuctionWinner::where('participant_id', $id)->update(['paid' => true]);
+
+        return redirect()->route('winners.index');
     }
 
     /**

@@ -15,6 +15,7 @@
                         <th>Name</th>
                         <th></th>
                         <th></th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -28,6 +29,9 @@
                                     @csrf
                                     <button type="submit" class="btn btn-outline-danger">Delete</button>
                                 </form>
+                            </td>
+                            <td>
+                                <a href="{{ route('winners.create', ['item_id' => $item->id]) }}" class="btn btn-outline-success">Add Winner</a>
                             </td>
                         </tr>
                     @endforeach
