@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Donor;
 use App\Item;
 use App\Participant;
 use Illuminate\Http\Request;
@@ -33,6 +34,11 @@ class ItemsController extends Controller
             'title' => 'Add Item',
             'id' => null,
             'name' => null,
+            'item_number' => null,
+            'description' => null,
+            'estimated_value' => null,
+            'donor_id' => null,
+            'donors' => Donor::select('name', 'id')->orderBy('name')->get(),
         ]);
     }
 
@@ -46,6 +52,10 @@ class ItemsController extends Controller
     {
         $valid  = $request->validate([
             'name' => 'required',
+            'item_number' => 'required|numeric|unique:items',
+            'estimated_value' => 'required|numeric',
+            'description' => 'required',
+            'donor_id' => 'required|numeric',
         ]);
 
         Item::create($valid);
@@ -80,6 +90,11 @@ class ItemsController extends Controller
             'title' => 'Edit Item',
             'id' => $item->id,
             'name' => $item->name,
+            'item_number' => $item->item_number,
+            'description' => $item->description,
+            'estimated_value' => $item->estimated_value,
+            'donor_id' => $item->donor_id,
+            'donors' => Donor::select('name', 'id')->orderBy('name')->get(),
         ]);
     }
 
@@ -94,6 +109,10 @@ class ItemsController extends Controller
     {
         $valid  = $request->validate([
             'name' => 'required',
+            'item_number' => 'required|numeric|unique:items',
+            'estimated_value' => 'required|numeric',
+            'description' => 'required',
+            'donor_id' => 'required|numeric',
         ]);
 
         $item = Item::findOrFail($id);

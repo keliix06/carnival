@@ -12,7 +12,10 @@
                 <table id="table" class="table table-striped">
                     <thead>
                     <tr>
+                        <th>Item Number</th>
                         <th>Name</th>
+                        <th>Estimated Value</th>
+                        <th>Description</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -21,7 +24,10 @@
                     <tbody>
                     @foreach ($items as $item)
                         <tr>
+                            <td>{{ $item->item_number }}</td>
                             <td>{{ $item->name }}</td>
+                            <td>${{ $item->estimated_value }}</td>
+                            <td>{!! nl2br(e($item->description)) !!}</td>
                             <td><a href="{{ route('items.edit', $item->id) }}" class="btn btn-outline-info">Edit</a></td>
                             <td>
                                 <form action="{{ route('items.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete {{ $item->name }}?');">
