@@ -34,6 +34,24 @@
                                     <form action="{{ route('winners.update', $winner->id) }}" method="POST">
                                         @method('PUT')
                                         @csrf
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="payment_type" value="{{ \App\AuctionWinner::PAYMENT_TYPE_CASH }}" checked>
+                                            <label class="form-check-label">
+                                                Cash
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="payment_type" value="{{ \App\AuctionWinner::PAYMENT_TYPE_CHECK }}">
+                                            <label class="form-check-label">
+                                                Check
+                                            </label>
+                                        </div>
+                                        <div class="form-check disabled">
+                                            <input class="form-check-input" type="radio" name="payment_type" value="{{ \App\AuctionWinner::PAYMENT_TYPE_STRIPE }}">
+                                            <label class="form-check-label">
+                                                Stripe
+                                            </label>
+                                        </div>
                                         <button type="submit" class="btn btn-outline-success">Mark Paid</button>
                                     </form>
                                 @endif
