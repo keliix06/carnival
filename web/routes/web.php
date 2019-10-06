@@ -21,3 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('participants', 'ParticipantsController');
 Route::resource('items', 'ItemsController');
 Route::resource('winners', 'WinnersController');
+Route::resource('donors', 'DonorsController');
