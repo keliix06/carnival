@@ -96,7 +96,7 @@ class WinnersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $winner = AuctionWinner::where('participant_id', $id)->update(['paid' => true]);
+        $winner = AuctionWinner::where('participant_id', $id)->update(['paid' => true, 'payment_type' => request('payment_type')]);
 
         return redirect()->route('winners.index');
     }
