@@ -49,6 +49,9 @@
                                 <a class="nav-link {{ (request()->segment(1) == 'items') ? 'active' : '' }}" href="/items">Items</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link {{ (request()->segment(1) == 'donors') ? 'active' : '' }}" href="/donors">Donors</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link {{ (request()->segment(1) == 'winners') ? 'active' : '' }}" href="/winners">Winners</a>
                             </li>
                         @endguest
