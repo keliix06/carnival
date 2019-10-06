@@ -46,18 +46,6 @@
                         </form>
                     </div>
                 </div>
-
-                <div class="card">
-                    <div class="card-header">Existing Winners for {{ $item->name }}</div>
-
-                    <div class="card-body">
-                        <ul class="list-unstyled">
-                            @foreach ($currentWinners as $winner)
-                                <li>{{ $winner->participant->bidder_number }} - {{ $winner->participant->name }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

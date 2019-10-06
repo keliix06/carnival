@@ -37,7 +37,17 @@
                                 </form>
                             </td>
                             <td>
-                                <a href="{{ route('winners.create', ['item_id' => $item->id]) }}" class="btn btn-outline-success">Add Winner</a>
+                                @if($item->winner())
+                                    {{ $item->winner()->name }} <br>
+
+                                    <form action="{{ route('winners.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Do you really want to remove the winner for this item?');">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="btn btn-link btn-sm"><i class="far fa-trash-alt"></i> Delete</button>
+                                    </form>
+                                @else
+                                    <a href="{{ route('winners.create', ['item_id' => $item->id]) }}" class="btn btn-outline-success">Add Winner</a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
