@@ -6,6 +6,7 @@ use App\AuctionWinner;
 use App\Item;
 use App\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WinnersController extends Controller
 {
@@ -44,7 +45,6 @@ class WinnersController extends Controller
             'title' => 'Add Winner',
             'participants' => Participant::all(),
             'item' => Item::findOrFail(request()->get('item_id')),
-            'currentWinners' => AuctionWinner::where('item_id', request()->get('item_id'))->get(),
         ]);
     }
 
@@ -109,6 +109,7 @@ class WinnersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('auction_winners')->where('item_id', $id)->delete();
+        return redirect()->route('items.index');
     }
 }
