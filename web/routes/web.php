@@ -22,3 +22,6 @@ Route::resource('participants', 'ParticipantsController');
 Route::resource('items', 'ItemsController');
 Route::resource('winners', 'WinnersController');
 Route::resource('donors', 'DonorsController');
+
+Route::get('/email', 'EmailController')->name('emails.confirm');
+Route::get('/email/send', 'EmailSendController')->name('emails.send');

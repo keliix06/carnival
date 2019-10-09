@@ -21,14 +21,14 @@
                             <td>{{ $winner->name }}</td>
                             <td>
                                 <ul class="list-unstyled">
-                                    @foreach($winner->wonItems as $item)
+                                    @foreach($winner->wonItems() as $item)
                                         <li>{{ $item->item->name }}</li>
                                     @endforeach
                                 </ul>
                             </td>
-                            <td>${{ $winner->wonItems->sum('price') / 100 }}</td>
+                            <td>${{ $winner->total() }}</td>
                             <td>
-                                @if($winner->hasPaid)
+                                @if($winner->hasPaid())
                                     <span class="text-success font-weight-bold">Already Paid</span>
                                 @else
                                     <form action="{{ route('winners.update', $winner->id) }}" method="POST">
