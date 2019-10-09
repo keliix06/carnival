@@ -9,6 +9,11 @@ class Item extends Model
 {
     protected $guarded = [];
 
+    public function donor()
+    {
+        return $this->belongsTo('App\Donor');
+    }
+
     public function winner()
     {
         return DB::table('participants')

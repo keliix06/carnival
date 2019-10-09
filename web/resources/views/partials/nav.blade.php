@@ -32,7 +32,9 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{ route('admin.emails.confirm') }}">Email Receipts To Users</a>
                             <a class="dropdown-item" href="{{ route('admin.reports.money') }}">$ Reports</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('admin.printout') }}">Office Printout</a>
+                            <a class="dropdown-item" href="{{ route('admin.auction-sheets') }}" target="blank">Auction Sheet Printouts</a>
                         </div>
                     </li>
                 @endif

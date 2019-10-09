@@ -27,4 +27,5 @@ Route::get('/email', 'EmailController')->name('admin.emails.confirm');
 Route::get('/email/send', 'EmailSendController')->name('admin.emails.send');
 
 Route::get('/admin/printout', 'Admin\Printout')->name('admin.printout');
+Route::get('/admin/auction-sheets', 'Admin\AuctionSheets')->name('admin.auction-sheets');
 Route::get('/admin/report', 'Admin\Reports\Money')->name('admin.reports.money');
