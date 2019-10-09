@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Reports;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class IndexController extends Controller
+class Money extends Controller
 {
     public function __invoke()
     {
-        return view('admin.index');
+        return view('admin.printout');
     }
 }
