@@ -55,6 +55,15 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ (request()->segment(1) == 'winners') ? 'active' : '' }}" href="/winners">Winners</a>
                             </li>
+
+                            @if(auth()->user()->isAdmin())
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->segment(1) == 'email') ? 'active' : '' }}" href="{{ route('emails.confirm') }}">Email Receipts To Users</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ (request()->segment(1) == 'winners') ? 'active' : '' }}" href="/winners">Reports</a>
+                                </li>
+                            @endif
                         @endguest
                     </ul>
                 </div>

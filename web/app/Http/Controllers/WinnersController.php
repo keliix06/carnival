@@ -18,13 +18,9 @@ class WinnersController extends Controller
     public function index()
     {
         $participants = Participant::all();
-        $participants->each(function($participant) {
-            $participant->wonItems = AuctionWinner::where('participant_id', $participant->id)->get();
-            $participant->hasPaid = AuctionWinner::where('participant_id', $participant->id)->where('paid', false)->count() < 1;
-        });
 
         $participants = $participants->filter(function($participant) {
-            return count($participant->wonItems) > 0;
+            return count($participant->wonItems()) > 0;
         });
 
         return view('winners', [
