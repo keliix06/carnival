@@ -18,6 +18,6 @@ class EmailSendController extends Controller
             Mail::to($user)->send(new CarnivalReceipt($participant));
         }
 
-        return view('emails.sent');
+        return view('admin.emails.sent');
     }
 }

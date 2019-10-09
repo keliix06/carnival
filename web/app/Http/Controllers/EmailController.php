@@ -11,7 +11,7 @@ class EmailController extends Controller
     {
         $users = Participant::whoWonAuctions();
 
-        return view('emails.confirm', [
+        return view('admin.emails.confirm', [
             'users' => $users,
         ]);
     }
