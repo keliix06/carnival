@@ -58,7 +58,7 @@ class WinnersController extends Controller
             'price' => request('price') * 100
         ]);
 
-        return redirect()->route('winners.index');
+        return redirect()->route('items.index');
     }
 
     /**
