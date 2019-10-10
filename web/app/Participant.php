@@ -14,6 +14,7 @@ class Participant extends Model
         return DB::table('participants')
             ->select('participants.*')
             ->join('auction_winners', 'auction_winners.participant_id', '=', 'participants.id')
+            ->distinct('participants.id')
             ->get();
     }
 
