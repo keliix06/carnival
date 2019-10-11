@@ -33,7 +33,7 @@
 
                             <div class="form-group">
                                 <label for="notes">Notes</label>
-                                <textarea class="form-control @error('notes') is-invalid @enderror" rows="3" name="notes" value="{{ $notes }}"></textarea>
+                                <textarea class="form-control @error('notes') is-invalid @enderror" rows="3" name="notes">{{ $notes }}</textarea>
                             </div>
 
                             <input type="hidden" name="id" value="{{ $id }}">
