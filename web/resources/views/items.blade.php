@@ -16,6 +16,7 @@
                         <th>Name</th>
                         <th>Estimated Value</th>
                         <th>Description</th>
+                        <th>Donor</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -28,6 +29,7 @@
                             <td>{{ $item->name }}</td>
                             <td>${{ $item->estimated_value }}</td>
                             <td>{!! nl2br(e($item->description)) !!}</td>
+                            <td><a href="/donors/{{ $item->donor->id }}/edit" target="_blank">{{ $item->donor->name }}</a></td>
                             <td><a href="{{ route('items.edit', $item->id) }}" class="btn btn-outline-info">Edit</a></td>
                             <td>
                                 <form action="{{ route('items.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Do you really want to delete {{ $item->name }}?');">
@@ -39,6 +41,9 @@
                             <td>
                                 @if($item->winner())
                                     {{ $item->winner()->name }} <br>
+                                    {{ $item->winner()->email }} <br>
+                                    {{ $item->winner()->phone }} <br>
+                                    ${{ $item->auctionWinner->price / 100 }} <br>
 
                                     <form action="{{ route('winners.destroy', $item->id) }}" method="POST" onsubmit="return confirm('Do you really want to remove the winner for this item?');">
                                         @method('DELETE')

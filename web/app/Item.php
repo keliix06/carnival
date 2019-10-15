@@ -21,4 +21,9 @@ class Item extends Model
             ->where('auction_winners.item_id', $this->id)
             ->first();
     }
+
+    public function auctionWinner()
+    {
+        return $this->hasOne('App\AuctionWinner');
+    }
 }
