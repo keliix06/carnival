@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Participant;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Participant;
 
 class Printout extends Controller
 {
@@ -12,7 +11,7 @@ class Printout extends Controller
     {
         $participants = Participant::all();
 
-        $participants = $participants->filter(function($participant) {
+        $participants = $participants->filter(function ($participant) {
             return count($participant->wonItems()) > 0;
         });
 

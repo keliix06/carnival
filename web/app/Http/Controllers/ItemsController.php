@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Donor;
 use App\Item;
-use App\Participant;
 use Illuminate\Http\Request;
 
 class ItemsController extends Controller
@@ -29,33 +28,34 @@ class ItemsController extends Controller
     public function create()
     {
         return view('item-form', [
-            'action' => route('items.store'),
-            'method' => 'POST',
-            'title' => 'Add Item',
-            'id' => null,
-            'name' => null,
-            'item_number' => null,
-            'description' => null,
+            'action'          => route('items.store'),
+            'method'          => 'POST',
+            'title'           => 'Add Item',
+            'id'              => null,
+            'name'            => null,
+            'item_number'     => null,
+            'description'     => null,
             'estimated_value' => null,
-            'donor_id' => null,
-            'donors' => Donor::select('name', 'id')->orderBy('name')->get(),
+            'donor_id'        => null,
+            'donors'          => Donor::select('name', 'id')->orderBy('name')->get(),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $valid  = $request->validate([
-            'name' => 'required',
-            'item_number' => 'required|numeric|unique:items',
+        $valid = $request->validate([
+            'name'            => 'required',
+            'item_number'     => 'required|numeric|unique:items',
             'estimated_value' => 'required|numeric',
-            'description' => 'required',
-            'donor_id' => 'required|numeric',
+            'description'     => 'required',
+            'donor_id'        => 'required|numeric',
         ]);
 
         Item::create($valid);
@@ -66,7 +66,8 @@ class ItemsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -77,7 +78,8 @@ class ItemsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -85,34 +87,35 @@ class ItemsController extends Controller
         $item = Item::findOrFail($id);
 
         return view('item-form', [
-            'action' => route('items.update', $item->id),
-            'method' => 'PUT',
-            'title' => 'Edit Item',
-            'id' => $item->id,
-            'name' => $item->name,
-            'item_number' => $item->item_number,
-            'description' => $item->description,
+            'action'          => route('items.update', $item->id),
+            'method'          => 'PUT',
+            'title'           => 'Edit Item',
+            'id'              => $item->id,
+            'name'            => $item->name,
+            'item_number'     => $item->item_number,
+            'description'     => $item->description,
             'estimated_value' => $item->estimated_value,
-            'donor_id' => $item->donor_id,
-            'donors' => Donor::select('name', 'id')->orderBy('name')->get(),
+            'donor_id'        => $item->donor_id,
+            'donors'          => Donor::select('name', 'id')->orderBy('name')->get(),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $valid  = $request->validate([
-            'name' => 'required',
-            'item_number' => 'required|numeric|unique:items',
+        $valid = $request->validate([
+            'name'            => 'required',
+            'item_number'     => 'required|numeric|unique:items',
             'estimated_value' => 'required|numeric',
-            'description' => 'required',
-            'donor_id' => 'required|numeric',
+            'description'     => 'required',
+            'donor_id'        => 'required|numeric',
         ]);
 
         $item = Item::findOrFail($id);
@@ -124,13 +127,15 @@ class ItemsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $item = Item::findOrFail($id);
         $item->delete();
+
         return redirect()->route('items.index');
     }
 }
