@@ -27,29 +27,30 @@ class ParticipantsController extends Controller
     public function create()
     {
         return view('participant-form', [
-            'action' => route('participants.store'),
-            'method' => 'POST',
-            'title' => 'Add Participant',
-            'id' => null,
+            'action'        => route('participants.store'),
+            'method'        => 'POST',
+            'title'         => 'Add Participant',
+            'id'            => null,
             'bidder_number' => null,
-            'name' => null,
-            'email' => null,
-            'phone' => null,
+            'name'          => null,
+            'email'         => null,
+            'phone'         => null,
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $valid  = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:participants',
-            'phone' => 'required',
+        $valid = $request->validate([
+            'name'          => 'required',
+            'email'         => 'required|email|unique:participants',
+            'phone'         => 'required',
             'bidder_number' => 'required|integer|unique:participants',
         ]);
 
@@ -61,7 +62,8 @@ class ParticipantsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -72,7 +74,8 @@ class ParticipantsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -80,30 +83,31 @@ class ParticipantsController extends Controller
         $participant = Participant::findOrFail($id);
 
         return view('participant-form', [
-            'action' => route('participants.update', $participant->id),
-            'method' => 'PUT',
-            'title' => 'Edit Participant',
-            'id' => $participant->id,
+            'action'        => route('participants.update', $participant->id),
+            'method'        => 'PUT',
+            'title'         => 'Edit Participant',
+            'id'            => $participant->id,
             'bidder_number' => $participant->bidder_number,
-            'name' => $participant->name,
-            'email' => $participant->email,
-            'phone' => $participant->phone,
+            'name'          => $participant->name,
+            'email'         => $participant->email,
+            'phone'         => $participant->phone,
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $valid  = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
+        $valid = $request->validate([
+            'name'          => 'required',
+            'email'         => 'required|email',
+            'phone'         => 'required',
             'bidder_number' => 'required|integer',
         ]);
 
@@ -116,7 +120,8 @@ class ParticipantsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

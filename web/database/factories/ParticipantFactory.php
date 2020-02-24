@@ -2,18 +2,18 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Model;
 use App\Participant;
 use Faker\Generator as Faker;
 
 $autoIncrement = autoIncrement();
 $factory->define(Participant::class, function (Faker $faker) use ($autoIncrement) {
     $autoIncrement->next();
+
     return [
         'bidder_number' => $autoIncrement->current(),
-        'name' => $faker->name,
-        'email' => $faker->email,
-        'phone' => $faker->phoneNumber,
+        'name'          => $faker->name,
+        'email'         => $faker->email,
+        'phone'         => $faker->phoneNumber,
     ];
 });
 

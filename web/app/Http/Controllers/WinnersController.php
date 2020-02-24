@@ -19,7 +19,7 @@ class WinnersController extends Controller
     {
         $participants = Participant::all();
 
-        $participants = $participants->filter(function($participant) {
+        $participants = $participants->filter(function ($participant) {
             return count($participant->wonItems()) > 0;
         });
 
@@ -36,26 +36,27 @@ class WinnersController extends Controller
     public function create()
     {
         return view('winners-form', [
-            'action' => route('winners.store'),
-            'method' => 'POST',
-            'title' => 'Add Winner',
+            'action'       => route('winners.store'),
+            'method'       => 'POST',
+            'title'        => 'Add Winner',
             'participants' => Participant::all(),
-            'item' => Item::findOrFail(request()->get('item_id')),
+            'item'         => Item::findOrFail(request()->get('item_id')),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         AuctionWinner::create([
             'participant_id' => request('participant_id'),
-            'item_id' => request('item_id'),
-            'price' => request('price') * 100
+            'item_id'        => request('item_id'),
+            'price'          => request('price') * 100,
         ]);
 
         return redirect()->route('items.index');
@@ -64,7 +65,8 @@ class WinnersController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -75,7 +77,8 @@ class WinnersController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -86,8 +89,9 @@ class WinnersController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -100,12 +104,14 @@ class WinnersController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         DB::table('auction_winners')->where('item_id', $id)->delete();
+
         return redirect()->route('items.index');
     }
 }

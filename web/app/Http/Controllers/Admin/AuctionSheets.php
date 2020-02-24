@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Item;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Item;
 
 class AuctionSheets extends Controller
 {
